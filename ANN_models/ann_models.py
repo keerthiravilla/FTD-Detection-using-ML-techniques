@@ -1,6 +1,4 @@
-#This code loads the MRI data and labels, splits the data into training and testing sets, scales the data using StandardScaler, 
-#defines the Random Forest model with 100 trees and a random seed, trains the model on the training set, predicts the labels for the test set, 
-#and prints the classification report and confusion matrix.
+
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
