@@ -1,4 +1,7 @@
-
+#This code loads the MRI data and labels, splits the data into training and testing sets, scales the data using StandardScaler, 
+#defines the ANN model with 2 hidden layers and dropout regularization, compiles the model with binary cross-entropy loss and accuracy metric, 
+#defines early stopping to prevent overfitting, trains the model on the training set with a batch size of 32 and 100 epochs, 
+#predicts the labels for the test set using the trained model, and prints the classification report and confusion matrix.
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
