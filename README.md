@@ -1,5 +1,16 @@
 # Detection of Frontotemporal Dementia by Learning Few Training Samples
 # Background 
+Fronto-temporal Dementia is a neurocognitive syndrome. It is one of the most common types of
+dementia in people under the age of 65, and its prevalence is expected to rise as the patient ages.
+Making an early diagnosis of neurodegenerative diseases is one of modern neuroscience's most
+significant challenges. Although there is no cure for this family of diseases, the effectiveness of medical
+treatment is largely dependent on the timing of their detection. Trained professionals can effectively
+reach a correct diagnosis using visual analysis of Magnetic Resonance Imaging (fMRI) or raw (MRI).
+However, as this operation takes time and may be subject to personal interpretation, we explore the
+performance of a group of machine learning algorithms and formulate a correct FTD diagnosis, in
+order to provide medical professionals with a supporting tool.
+
+# Methods: 
 Convolutional neural networks (CNNs) achieve the high classification accuracy for detecting
 frontotemporal dementia with a large number of training samples based on magnetic resonance
 imaging (MRI) scans, but they didn‘t achieve good diagnostic accuracy with few training samples.
@@ -10,7 +21,6 @@ through which we resolve the problem of data insufficiency and achieve the class
 as same as with a large number of training samples. We investigate the detection of frontotemporal
 dementia using only a few MRI scans for training.
 
-# Methods: 
 We utilized the transfer learning and few-shot learning methodologies to overcome the
 problem of a few available training samples. Firstly, we created the feature extraction model that is
 trained on the large ADNI dataset (a total of 662 samples). This developed model is the convolutional
