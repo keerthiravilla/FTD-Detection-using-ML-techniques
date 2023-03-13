@@ -1,3 +1,7 @@
+#This code loads the MRI data and labels, splits the data into training and testing sets, scales the data using StandardScaler, 
+#defines the SVM model with a linear kernel and regularization parameter C, trains the model on the training set,
+#predicts the labels for the test set, and prints the classification report and confusion matrix.
+
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
