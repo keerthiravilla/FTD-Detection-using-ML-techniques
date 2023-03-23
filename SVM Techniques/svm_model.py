@@ -1,34 +1,44 @@
-#This code loads the MRI data and labels, splits the data into training and testing sets, scales the data using StandardScaler, 
-#defines the SVM model with a linear kernel and regularization parameter C, trains the model on the training set,
-#predicts the labels for the test set, and prints the classification report and confusion matrix.
-
+# Import required libraries
 import numpy as np
+from sklearn import svm, metrics, preprocessing
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVC
-from sklearn.metrics import classification_report, confusion_matrix
+import nibabel as nib
+import os
 
-# Load the data and labels
-data = np.load('ftd_mri_data.npy')
-labels = np.load('ftd_mri_labels.npy')
+# Load the MRI image data
+data_dir = 'path/to/mri/data/directory'
+subjects = os.listdir(data_dir)
+
+# Extract the MRI data and labels
+X = []
+y = []
+for subject in subjects:
+    img_path = os.path.join(data_dir, subject)
+    img = nib.load(img_path)
+    data = img.get_fdata()
+    X.append(data.reshape(-1))
+    if 'ftd' in subject:
+        y.append(1)
+    else:
+        y.append(0)
+
+# Preprocess the MRI data
+X = preprocessing.StandardScaler().fit_transform(X)
 
 # Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-# Scale the data
-scaler = StandardScaler()
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
+# Train the SVM model
+svm_model = svm.SVC(kernel='linear', C=1).fit(X_train, y_train)
 
-# Define the SVM model
-model = SVC(kernel='linear', C=1.0, random_state=42)
+# Predict the labels for the test data
+y_pred = svm_model.predict(X_test)
 
-# Train the model
-model.fit(X_train, y_train)
+# Evaluate the model performance
+accuracy = metrics.accuracy_score(y_test, y_pred)
+precision = metrics.precision_score(y_test, y_pred)
+recall = metrics.recall_score(y_test, y_pred)
 
-# Make predictions on the testing set
-y_pred = model.predict(X_test)
-
-# Print the classification report and confusion matrix
-print(classification_report(y_test, y_pred))
-print(confusion_matrix(y_test, y_pred))
+print('Accuracy:', accuracy)
+print('Precision:', precision)
+print('Recall:', recall)
